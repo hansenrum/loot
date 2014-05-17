@@ -1,0 +1,87 @@
+body {
+  margin: 20px 40px;
+}
+
+/* Classes */
+.clear {display:block; clear:both;}
+
+/* Content */
+#form-rules #wrp-saving {
+  display:none;
+  background: url(../images/ico-loading.gif) no-repeat left center;
+  padding-left: 25px;
+  font-size: 10pt;
+  color: #666;
+}
+
+#form-rules fieldset {
+  padding: 0 0 20px 0;
+}
+
+#form-rules legend {
+  border: 0;
+  line-height: inherit;
+  padding: 10px 0;
+  margin-bottom: 0;
+}
+
+#form-rules fieldset ul {
+  list-style: none;
+  margin: 0 0 0 20px;
+  padding: 0;
+  clear: both;
+}
+
+#form-rules fieldset ul li {
+  padding: 8px 0;
+}
+
+#form-rules fieldset ul li div.wrapper-resourceURL,
+#form-rules fieldset ul li div.wrapper-resourceRedirectURL {
+  margin-left:0;
+  float:none;
+  display:inline-block;
+  position:relative;
+}
+
+#form-rules fieldset ul li div.wrapper-resourceURL .icon,
+#form-rules fieldset ul li div.wrapper-resourceRedirectURL .icon {
+  display: block;
+  background-color: transparent;
+  width: 14px;
+  height: 14px;
+  position:absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -7px;
+}
+#form-rules fieldset ul li div.wrapper-resourceURL .icon-ok-sign,
+#form-rules fieldset ul li div.wrapper-resourceRedirectURL .icon-ok-sign {
+  cursor:pointer;
+}
+#form-rules fieldset ul li div.wrapper-resourceURL .icon-ok-sign:hover,
+#form-rules fieldset ul li div.wrapper-resourceRedirectURL .icon-ok-sign:hover {
+  opacity:0.6;
+}
+
+#form-rules .form-actions #wrp-msg {
+	display:inline-block;
+	font-size: 11pt;
+	vertical-align:middle;
+	padding-left:8px;
+}
+
+#form-rules .form-actions .msg-success {
+	color:green;
+}
+
+#form-rules .form-actions .msg-error {
+	color:red;
+}
+
+#form-rules .form-actions .msg-action {
+	color:grey;
+}
+
+
+  

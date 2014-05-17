@@ -1,0 +1,17 @@
+<% list( resources, function( resource ) { %>
+  <li <%= (el)-> el.data('resource', resource) %> class="<%= resource._cid %>">
+    <input class="resourceEnabled" type="checkbox" <% if(resource.attr('enabled')) { %> checked="checked"<% } %> />
+    <div class="wrapper-resourceURL span5 control-group">
+        <span class="icon"></span>
+        <input class="resourceURL span5" type="text" placeholder="Resource URL (e.g css/style.css)" value="<%= resource.attr('resourceURL') %>" data-status="<%= resource.attr('status') %>" data-resourcetype="resourceURL" />
+    </div>
+    
+    <span class="icon-chevron-right"></span>
+    <div class="wrapper-resourceRedirectURL span5 control-group">
+        <span class="icon"></span>
+        <input class="resourceRedirectURL span5" type="text" placeholder="Redirect URL (e.g http://localhost/css/style.css)" value="<%= resource.attr('resourceRedirectURL') %>" data-status="<%= resource.attr('status') %>" data-resourcetype="resourceRedirectURL" />
+    </div>
+    
+    <a class="btn btn-delete"><i class="icon-minus-sign"></i></a>
+  </li>
+<% }); %>

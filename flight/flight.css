@@ -1,0 +1,166 @@
+#loot_overlay {
+	top: 0px;
+	position: fixed;
+	z-index: 99999999999999;
+	width: 100%;
+	background-color: rgba(0,0,0,.8);
+	-webkit-transition: opacity 3s;
+	height: 100%;
+	opacity: 0;
+}
+
+#branding {
+	background-image: url(http://heimdash.com/loot_hero_colour.svg);
+	position: absolute;
+	z-index: 9999999999999999999999999999;
+	bottom: -30px;
+	left: 0px;
+	height: 400px;
+	width: 400px;
+	background-size: 400px;
+}
+
+
+
+
+@media(max-width: 768px) {
+  .header {
+    padding: 5px 0;
+    min-height: 40px;
+  }
+  .header svg {
+    width: 30px;
+    height: 30px;
+  }
+  .header .dropdown {
+    margin-top: 7px;
+  }
+  .blog_title {
+    width: 288px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .footer {
+    padding: 15px 0 5px 0;
+  }
+}
+
+
+
+
+
+@media(min-width: 768px) {
+  .header {
+    padding: 20px 0;
+    min-height: 90px;
+  }
+  .header svg {
+    width: 50px;
+    height: 50px;
+  }
+  .header .dropdown {
+    margin-top: 15px;
+  }
+  .footer {
+    padding: 30px 0 20px 0;
+  }
+  .copy {
+    text-align: right;
+  }
+}
+body {
+  background-color: #666;  
+}
+a, a:hover, a:focus {
+  color: #058;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #666;
+}
+.header {
+  background-color: #fff;
+}
+.logo_line {
+  fill: #333;
+}
+.content {
+  background-color: #fff;
+  min-height: 370px;
+}
+.portfolio, .blog, .about {
+  padding-bottom: 30px;  
+}
+.portfolio {
+  background-color: #aaa5a0;
+}
+.illustration {
+  border: 5px solid #000;
+  background-color: #fff;
+  margin-top: 30px;
+  padding: 30px;
+}
+.footer {
+  color: #fff;
+}
+.footer a {
+  color: #fff;
+}
+.content p {
+  line-height: 200%;
+}
+.date {
+  padding-right: 30px;
+}
+.tnoda_addthis {
+  width: 80px;
+  margin: 6px 0 0 15px;
+}
+.mobile_ad {
+  margin-left: -15px;
+}
+
+
+
+
+
+.traceroute {
+   stroke: white;
+   fill-opacity: 0;
+   stroke-width: 2px;    
+   opacity: 0.5;
+}
+
+.countries {
+  fill: #acacac;
+  stroke: #666666;
+  stroke-width: 0px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.airports {
+  fill: #565656;
+  stroke: #565656;
+  stroke-width: 0px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.route {
+  fill: none;
+  stroke-width: 0;
+}
+.plane {
+  fill: #fff;
+  stroke-width: 0;
+}
+@media(max-width: 768px) {
+  #map {
+    margin-top: -100px;
+  }
+}
+@media(min-width: 768px) {
+  #map {
+    margin-top: -200px;
+  }
+}

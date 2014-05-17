@@ -1,0 +1,85 @@
+{
+  "name": "L.O.O.T.",
+  "description": "The Low Orbit Observational Toolkit",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {"page": "background.html"},
+  "icons": {
+      "32": "icon_32.png",
+      "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon_128.png"
+  },
+
+  "content_scripts": [
+    { 
+      "matches": [
+          "http://www.spiegel.de/*",
+          "http://www.golem.de/*",
+          "http://www.gazprom.ru/*",
+          "http://www.faz.net/*",
+          "http://www.nsa.gov/*"
+        ],
+      "js": [
+        "resources/jquery.js",
+        "flight/flight_files/d3.js",
+        "flight/underscore.js",
+        "flight/flight_files/queue.js",
+        "flight/flight_files/topojson.js",
+        "onpage.js"
+        ],
+
+      "css": ["flight/flight.css"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+
+  "web_accessible_resources": [
+    "images/*.png",
+    "templates/*",
+    "flight/flight.html",
+    "flight/*",
+    "flight/json/*"
+  ],
+
+  "permissions": [
+    "webRequest",
+    "*://*/*",
+    "webRequestBlocking"
+  ]
+}
+
+
+
+
+// {
+//     "name": "Devtools redirect",
+//     "version": "0.0.2.2",
+//     "manifest_version": 2,
+//     "description": "Catch and redirect resources loaded from a specific domain to any file hosted on a local or remote server.",
+//     "icons": {
+//       "32": "icon_32.png",
+//       "128": "icon_128.png"
+//     },
+    
+//     "browser_action": {
+//       "default_popup": "popup.html",
+//       "default_icon": "images/browser-icon-inactive.png"
+//     },
+    
+//     "background": {"page": "background.html"},
+    
+//     "devtools_page": "devtools.html",
+
+//     "permissions": [
+//       "storage",
+//       "background",
+//       "tabs",
+//       "webRequest",
+//       "webRequestBlocking",
+//       "<all_urls>"
+//     ]   
+// }
