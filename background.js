@@ -67,7 +67,7 @@ var interceptRequest = function(request) {
     // Detect new hosts
     for (var key in hosts) {
       if (hosts[key].count == 1 && !hosts[key].flushed) {
-        hosts[req.hostname].flushed = true;
+        hosts[key].flushed = true;
         tobeFlushed.push(key);
       }
     }
