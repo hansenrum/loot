@@ -18,24 +18,20 @@ $(function() {
 			  {"hops": [{"ip": "217.9.109.116", "geo": {"country": "DE", "subdivisions": ["BE"], "location": [52.5167, 13.4], "continent": "EU", "timezone": "Europe/Berlin"}}, {"ip": "217.9.109.113", "geo": {"country": "DE", "subdivisions": ["BE"], "location": [52.5167, 13.4], "continent": "EU", "timezone": "Europe/Berlin"}}, {"ip": "94.135.127.37", "geo": {"country": "DE", "subdivisions": [], "location": [51.0, 9.0], "continent": "EU", "timezone": "None"}}, {"ip": "62.214.35.17", "geo": {"country": "DE", "subdivisions": [], "location": [51.0, 9.0], "continent": "EU", "timezone": "None"}}, {"ip": "62.214.106.50", "geo": {"country": "DE", "subdivisions": [], "location": [51.0, 9.0], "continent": "EU", "timezone": "None"}}, {"ip": "62.214.106.58", "geo": {"country": "DE", "subdivisions": [], "location": [51.0, 9.0], "continent": "EU", "timezone": "None"}}, {"ip": "62.214.110.50", "geo": {"country": "DE", "subdivisions": [], "location": [51.0, 9.0], "continent": "EU", "timezone": "None"}}, {"ip": "213.248.89.109", "geo": {"country": null, "subdivisions": [], "location": [47.0, 8.0], "continent": "EU", "timezone": "Europe/Vaduz"}}, {"ip": "80.91.251.53", "geo": {"country": null, "subdivisions": [], "location": [47.0, 8.0], "continent": "EU", "timezone": "Europe/Vaduz"}}, {"ip": "80.91.251.144", "geo": {"country": null, "subdivisions": [], "location": [47.0, 8.0], "continent": "EU", "timezone": "Europe/Vaduz"}}, {"ip": "80.91.246.239", "geo": {"country": null, "subdivisions": [], "location": [47.0, 8.0], "continent": "EU", "timezone": "Europe/Vaduz"}}, {"ip": "213.248.78.82", "geo": {"country": null, "subdivisions": [], "location": [47.0, 8.0], "continent": "EU", "timezone": "Europe/Vaduz"}}, {"ip": "217.151.130.30", "geo": {"country": "RU", "subdivisions": [], "location": [60.0, 100.0], "continent": "EU", "timezone": "None"}}, {"ip": "217.151.130.37", "geo": {"country": "RU", "subdivisions": [], "location": [60.0, 100.0], "continent": "EU", "timezone": "None"}}], "dest_host": "gazprom.ru", "dest_ip": "217.151.130.37"}
 ];
 
-  function transform_routes_to_edges(routes) {
 
-      // just add all routes into one list of edges  (we cannot tell apart route afterwards!)
-      var edges = [];
-      _.each(routes, function(r) {
-	      var last_hop = null;
-	      _.each(r["hops"], function(h) {
-		      if (h["geo"]) {
-			  if (last_hop) {
-			      var edge = [last_hop["ip"], h["ip"]];
-			      // edge.reverse();  // responses float from dest to source
-			      edges.push(edge);
-			  }
-		      }
-		      last_hop = h;
-		  });
+  function transform_route_to_path(route, options) {
+      // options {omit_self_loops: true}
+      var path = [], 
+	  last_hop = null;
+      _.each(route["hops"], function(h) {
+	      if (h["geo"] && h["geo"]["location"]) {
+		  if (! options || ! options.omit_self_loops || ! last_hop || last_hop["ip"] != h["ip"]) {  
+		      path.push(h["ip"]);
+		  }
+		  last_hop = h;
+	      }
 	  });
-      return edges;
+      return path;
   }
 
   function routes_to_topojson(routes) {
@@ -89,7 +85,7 @@ $(function() {
               .attr("width", currentWidth)
               .attr("height", currentWidth * height / width);
 
-  var airportMap = {};
+  // var airportMap = {};
 
   function transition(plane, route) {
     var l = route.node().getTotalLength();
@@ -121,7 +117,7 @@ $(function() {
     }
   }
 
-  function fly(origin, destination) {
+  function fly(origin, destination, airportMap) {
     var route = svg.append("path")
                    .datum({type: "LineString", coordinates: [airportMap[origin], airportMap[destination]]})
                    .attr("class", "route")
@@ -135,24 +131,13 @@ $(function() {
     transition(plane, route);
   }
 
-  function draw_route(points) {
-	    coords=[];
-	    zurueck=[]
-		_.each(points, function(p) {
-			coords.push(airportMap[p]);
-			zurueck.push(airportMap[p]);
-		});
-		zurueck.reverse();
-		_.each(zurueck,function(p) {
-			 coords.push(p);
-		})
-		
-		route=svg.append("path")
-			  .datum({type: "LineString", coordinates: coords })
-              .attr("class", "traceroute")
-              .attr("d", path);
+  function draw_route(airports, airportMap) {
+      var coords = _.map(airports, function(a) { return airportMap[a]; });
+      route=svg.append("path")
+	  .datum({type: "LineString", coordinates: coords })
+	  .attr("class", "traceroute")
+	  .attr("d", path);
   }
-
 
   function loaded(error, countries) { // , airports) {
     svg.append("g")
@@ -164,13 +149,15 @@ $(function() {
        .attr("d", path);
 
 
-      // update_airports_from_routes(all_routes);
+    // static demo
+    // update_airports_from_routes(all_routes);
   }
 
   function update_airports_from_routes(routes) {
 
-    var airports = routes_to_topojson(routes);
-    var od_pairs = transform_routes_to_edges(routes);
+      var airports = routes_to_topojson(routes),
+	  airportMap = {};
+    // var od_pairs = transform_routes_to_edges(routes);
 
     svg.append("g")
        .attr("class", "airports")
@@ -186,7 +173,12 @@ $(function() {
       airportMap[geos[i].id] = geos[i].geometry.coordinates;
     }
 
-    draw_route(_.flatten(od_pairs));
+    _.each(routes, function(route) {
+	    var airports = transform_route_to_path(route, {omit_self_loops: true}),
+		airports_back = airports.slice(0,-1).reverse(),
+		airports_roundtrip = airports.concat(airports_back);
+	  draw_route(airports_roundtrip , airportMap );
+    });
 
     //  var i = 0;
     //setInterval(function() {
@@ -194,7 +186,7 @@ $(function() {
     //    i = 0;
     //  }
     //  var od = od_pairs[i];
-    //  fly(od[0], od[1]);
+    //  fly(od[0], od[1], airportMap);
     //  i++;
     //	}, 15);  // 150
 
@@ -207,7 +199,8 @@ $(function() {
   setInterval(function() {
   	console.log(lootData);
   	if (lootData.length>0) {
-  		update_airports_from_routes(lootData)
+	    update_airports_from_routes(lootData)
+	    //	  update_airports_from_routes(all_routes);
   	}
   }, 5000);
 
