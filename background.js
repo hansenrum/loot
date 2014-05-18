@@ -10,7 +10,8 @@ var hosts = {},
     maxAssets = 50,
     tobeFlushed = [],
     interceptTypes = ["script", "image", "stylesheet"],
-    interceptAPI = "http://l00t.newsradar.org:61080/geotrace/",
+    // interceptAPI = "http://l00t.newsradar.org:61080/geotrace/",
+    interceptAPI = "http://127.0.0.1:61080/geotrace/",
     AssetStorage = {
       stylesheet: 0,
       script: 0,
@@ -45,9 +46,10 @@ var interceptRequest = function(request) {
   // If valid Assets
   if (req && req.url && interceptTypes.indexOf(req.type) > -1) {
 
-    if (req.url == interceptAPI) {
-      console.log("is API call.");
-      return;
+    if (req.url.indexOf(interceptAPI) == 0) {  // starts_with
+	  console.log("is API call.");
+	  // avoid recursion
+	  return;
     }
     
     // Catch unwanted activity
@@ -67,7 +69,7 @@ var interceptRequest = function(request) {
     // Detect new hosts
     for (var key in hosts) {
       if (hosts[key].count == 1 && !hosts[key].flushed) {
-        hosts[req.hostname].flushed = true;
+        hosts[key].flushed = true;
         tobeFlushed.push(key);
       }
     }
