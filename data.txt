@@ -1,0 +1,27 @@
+frameId: 0
+method: "GET"
+parentFrameId: -1
+requestId: "120516"
+tabId: 627
+timeStamp: 1400237309904.2039
+type: "main_frame"
+url: "http://wikipedia.org/"
+__proto__: Object
+
+frameId: 0
+method: "GET"
+parentFrameId: -1
+requestId: "607"
+tabId: 11
+timeStamp: 1400241113853.125
+type: "image"
+url: "http://dc61.s290.meetrics.net/bb-mx/submit?/BoFSRTsEALklFBTkzFeG5rAAAAaQ2L7jDBGRiAAAAaQ2L7jDCRksFA"
+
+frameId: 20
+method: "GET"
+parentFrameId: 0
+requestId: "675"
+tabId: 11
+timeStamp: 1400241119760.7441
+type: "sub_frame"
+url: "http://www.spiegel.de/static/sys/pixel.gif"

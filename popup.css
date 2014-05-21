@@ -1,0 +1,23 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#list-resources {
+  width: 600px;
+  font-size:13px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#list-resources .to {
+  font-weight:bold;
+}
+
+#list-resources li {
+  padding: 6px 10px;
+  border-radius:3px;
+  border: 1px solid #DDD;
+  background: -webkit-linear-gradient(top, #FEFEFE, #EFEFEF);
+}

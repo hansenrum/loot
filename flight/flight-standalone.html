@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html  lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This flight animation uses d3.js geo and SVG transition.">
+    <link rel="stylesheet" href="flight_files/bootstrap.css">
+    <link rel="stylesheet" href="flight_files/v4.css">
+<script src="../resources/jquery.js"></script>
+    <script src="flight_files/bootstrap.js"></script>
+    <title>Flight Animation - TNODA</title>
+
+
+<script src="underscore.js"></script>
+    
+<link rel="stylesheet" href="flight_files/v4blue.css">
+<style>
+
+body {
+	background-color: rgba(0,0,0,.8);
+}
+
+.packet {
+  stroke: yellow;
+  fill: yellow;
+  opacity: 0.7;
+}
+.traceroute {
+   stroke: white;
+   fill-opacity: 0;
+   stroke-width: 2px;    
+   opacity: 0.5;
+}
+
+.countries {
+  fill: #b0d0ab;
+  stroke: #6cb0e0;
+  stroke-width: 0.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.airports {
+  fill: #036;
+  stroke: #6cb0e0;
+  stroke-width: 0.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.route {
+  fill: none;
+  stroke-width: 0;
+}
+.plane {
+  fill: #fff;
+  stroke-width: 0;
+}
+@media(max-width: 768px) {
+  #map {
+    margin-top: -100px;
+  }
+}
+@media(min-width: 768px) {
+  #map {
+    margin-top: -200px;
+  }
+}
+</style>
+
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-4">
+          </div>
+          <div class="col-xs-4">
+            <div class="text-center">
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="text-right">
+              <div class="dropdown">
+                <a href="#" data-toggle="dropdown"></a>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      
+<div id="fb-root"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      
+<div class="text-center">
+  
+  
+</div>
+
+    </div>
+    <div class="col-xs-12">
+      <h2>loot standalone</h2>
+      <div><table>
+  <tbody><tr>
+    <td style="padding-top: 5px;"><div class="g-plusone" data-size="medium"></div></td>
+    <td></td>
+  </tr>
+</tbody></table></div>
+      <p class="lead" style="margin-bottom: 0;"></p>
+    </div>
+  </div>
+</div>
+<div id="map"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12" style="margin-bottom: 30px;">
+      
+<div style="margin-top: 20px;" class="text-center">
+  
+  
+</div>
+
+    </div>
+  </div>
+</div>
+
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+<script src="flight_files/d3.js"></script>
+<script src="flight_files/queue.js"></script>
+<script src="flight_files/topojson.js"></script>
+<script src="flight_files/flightanimation.js"></script>
+
+  
+</body></html>
