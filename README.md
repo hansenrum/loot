@@ -1,6 +1,7 @@
-L.0.0.T
+l00t
 ===============================
 
-Traceroute all website assets via a Chrome Extension.
-.
+Traceroute website assets via a Chrome Extension.
+Get further info on hostnames. Hunt for highscores.
+
 
